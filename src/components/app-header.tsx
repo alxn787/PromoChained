@@ -17,32 +17,20 @@ export function AppHeader({ links = [] }: { links: { label: string; path: string
   }
 
   return (
-    <header className="relative z-50 px-4 py-2 my-5 max-w-6xl mx-auto flex justify-between">
-      <div className="items-center">
-        <div className="flex items-baseline gap-4">
-          <Link className="text-3xl text-[#ff5840]/90 font-extrabold " href="/">
-            <span>PromoChain</span>
-          </Link>
-          <div className="hidden md:flex items-center">
-            {/* <ul className="flex gap-4 flex-nowrap items-center">
-              {links.map(({ label, path }) => (
-                <li key={path}>
-                  <Link
-                    className={`hover:text-neutral-500 dark:hover:text-white ${isActive(path) ? 'text-neutral-500 dark:text-white' : ''}`}
-                    href={path}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
-          </div>
-        </div>
+    <div className="min-w-7xl mx-auto my-5">
+      <div className='flex justify-between items-center'>
+          <div>
 
-        <div className="hidden md:flex items-center gap-4">
-          <WalletButton />
-        </div>
+          </div>
+          <div className="flex items-baseline gap-4">
+            <Link className="text-3xl text-[#ff5840]/90 font-extrabold " href="/">
+              <span>PromoChain</span>
+            </Link>
+          </div>
+          <div className=" ">
+            <WalletButton />
+          </div>
       </div>
-    </header>
+    </div>
   )
 }

@@ -19,7 +19,7 @@ const links: { label: string; path: string }[] = [
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiased bg-[#f4ecd9]`}>
+      <body className={`antialiased `}>
         <AppProviders>
           <AppLayout links={links}>{children}</AppLayout>
         </AppProviders>
