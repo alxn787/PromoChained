@@ -355,7 +355,7 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
     }, [next, rotationInterval, auto])
 
     // Custom motion component to render the text as a custom HTML tag provided via prop
-    const MotionComponent = motion(as ?? "p")
+    const MotionComponent = useMemo(() => motion.create(as ?? "p"), [as])
 
     return (
       <MotionComponent

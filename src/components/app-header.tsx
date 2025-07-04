@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react'
 import { ThemeSelect } from '@/components/theme-select'
 import { ClusterUiSelect } from './cluster/cluster-ui'
 import { WalletButton } from '@/components/solana/solana-provider'
+import CenterUnderline from '@/fancy/components/text/underline-center'
 
 export function AppHeader({ links = [] }: { links: { label: string; path: string }[] }) {
   const pathname = usePathname()
@@ -25,9 +26,16 @@ export function AppHeader({ links = [] }: { links: { label: string; path: string
             </Link>
           </div>
           <div className='flex items-center gap-10 text-[#230c08] font-medium'>
-            <button className=' hover:text-[#ff5840] cursor-pointer'>Sponsor a Promo</button>
-            <button className=' hover:text-[#ff5840] cursor-pointer'>Join a Promo</button>
-            <button className=' hover:text-[#ff5840] cursor-pointer'>About Us</button>
+            <Link className='hover:text-[#ff5840]' href={'/'}>
+              <CenterUnderline>Sponsor a Promo</CenterUnderline>
+            </Link>
+            <Link className='hover:text-[#ff5840]' href={'/'}>
+              <CenterUnderline>Join a Promo</CenterUnderline>
+            </Link>
+            <Link className='hover:text-[#ff5840]' href={'/'}>
+              <CenterUnderline>About Us</CenterUnderline>
+            </Link>
+            
           </div>
           <div className=" ">
             <WalletButton />
