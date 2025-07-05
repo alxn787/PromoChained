@@ -123,6 +123,9 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.6.2
+      tailwind-animate:
+        specifier: ^0.2.10
+        version: 0.2.10
       tailwindcss:
         specifier: ^4.1.10
         version: 4.1.11
@@ -4088,6 +4091,9 @@ packages:
   synckit@0.11.8:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
     engines: {node: ^14.18.0 || >=16.0.0}
+
+  tailwind-animate@0.2.10:
+    resolution: {integrity: sha512-9vczT78R9O7HIrydvGJNz4/19ogjSQSFlYpwleAxcxIT1m9pvAIGQr/+f6qG9sB5gq3JLB6IRKmw9RGJUrLeXQ==}
 
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
@@ -9187,6 +9193,8 @@ snapshots:
   synckit@0.11.8:
     dependencies:
       '@pkgr/core': 0.2.7
+
+  tailwind-animate@0.2.10: {}
 
   tailwind-merge@3.0.2: {}
 
