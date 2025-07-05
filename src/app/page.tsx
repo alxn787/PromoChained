@@ -53,7 +53,7 @@ export default function Home() {
                   Traditional ads are a battle for fleeting attention. We believe there's a <span className="font-bold text-black">better </span> way.
                 </div>
                 <div className="p-2">
-                  Imagine your audience choosing to spend time with your brand, not because they're forced to, but because they're genuinely interested and rewarded for their engagement.
+                  Imagine your audience choosing your brand, drawn by genuine interest and rewarded engagement.
                 </div>
                 <div className="p-2">
                   When people want to learn, they're open. Your message isn't marketing. It's <span className="font-bold text-black">value</span>.
