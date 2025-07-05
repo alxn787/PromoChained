@@ -78,7 +78,8 @@ const CenterUnderline = ({
   const underlineVariants = {
     hidden: {
       width: 0,
-      originX: 0.5,
+      // Change originX to 0 to make it start from the left
+      originX: 0,
     },
     visible: {
       width: "100%",
@@ -95,7 +96,8 @@ const CenterUnderline = ({
     >
       <span>{children}</span>
       <motion.div
-        className="absolute left-1/2 bg-current -translate-x-1/2"
+        // Remove the translate-x-1/2 as it's no longer needed for left-to-right animation
+        className="absolute left-0 bg-current"
         style={{
           height: "var(--underline-height)",
           bottom: "calc(-1 * var(--underline-padding))",

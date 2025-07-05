@@ -34,16 +34,16 @@ export default function Home() {
               Check us out
             </Link>
           </div> */}
-      <section className="py-10 px-6 bg-gradient-to-r from-white to-gray-50">
+      <section className="py-8 px-6 bg-gradient-to-r from-white to-gray-50">
         <div className="max-w-6xl mx-auto">
           <div>
-            <div className="text-4xl md:text-4xl font-bold text-black mb-8 text-center">
-            Your Product is a Story Waiting to Be Told{' '}
-            <div className="mt-2 ">Let's Make Them Eager to Listen</div>
-          </div>
+            <div className="text-4xl md:text-4xl font-bold text-black  text-center mb-12">
+              Your Product is a Story Waiting to Be Told{' '}
+              <div className="mt-2 ">Let's Make Them Eager to Listen</div>
+            </div>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <div className="grid md:grid-cols-2 gap-12 mb-16 mt-10 ">
             <div className="">
               <div className="text-center justify-center font-semibold mt-5 text-xl ">
                   Stop Interrupting, Start Engaging
@@ -56,7 +56,7 @@ export default function Home() {
                   Imagine your audience choosing to spend time with your brand, not because they're forced to, but because they're genuinely interested and rewarded for their engagement.
                 </div>
                 <div className="p-2">
-                  When people are actively seeking knowledge, they're most open to new ideas. That's when your message transcends marketing and becomes real value. We create those moments.
+                  When people want to learn, they're open. Your message isn't marketing. It's <span className="font-bold text-black">value</span>.
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function Home() {
                   Our platform thrives on a simple truth: <span className="text-coral-red font-semibold text-white">rewarded attention is the most valuable attention</span>. 
                 </p>
                 <p className="text-[#9ca3af] leading-relaxed">
-                  Companies get engaged, interested users who actually want to learn about their products. You get paid for time you'd probably spend on social media anyway. Everyone wins.
+                  Companies get engaged, interested users who actually want to learn about their products. You get paid for time you'd probably spend on social media anyway. <span className="text-white font-bold">Everyone wins</span>.
                 </p>
               </div>
             </div>
