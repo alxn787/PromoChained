@@ -14,7 +14,7 @@ export default function Home() {
             </div>
             <TextrotateComponent />
         </div>
-        <div className="flex flex-col items-center justify-center mt-3 text-2xl text-neutral-600">
+        <div className="flex flex-col items-center justify-center mt-1 text-2xl text-neutral-600">
             <div className="mb-1">
               Turn Your Marketing Into a Rewarding Experience.  
             </div>
