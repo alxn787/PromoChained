@@ -11,9 +11,9 @@ export default function Home() {
     <div>
       <div className="h-screen ">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center mt-12">
-            <div className="text-6xl font-bold">
+            {/* <div className="text-6xl font-bold">
               Stop Shouting into the Void
-            </div>
+            </div> */}
             <TextrotateComponent />
           <div className="flex flex-col items-center justify-center mt-1 text-2xl text-neutral-600">
             <div className="mb-1">

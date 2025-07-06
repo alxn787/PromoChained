@@ -3,7 +3,7 @@ import TextRotate from "@/fancy/components/text/text-rotate"
 
 export default function TextrotateComponent() {
   return (
-    <div className="text-2xl sm:text-3xl md:text-4xl flex flex-row items-center justify-center font-overused-grotesk bg-white dark:text-muted text-foreground font-light overflow-hidden p-6 sm:p-20 md:p-6">
+    <div className="text-2xl sm:text-3xl md:text-5xl flex flex-row items-center justify-center text-bold font-overused-grotesk bg-white dark:text-muted text-foreground font-light overflow-hidden p-6 sm:p-20 md:p-6">
         <motion.div className="flex whitespace-pre" >
           <motion.span
             className="pt-0.5 sm:pt-1 md:pt-2 font-medium"
