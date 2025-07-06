@@ -1,3 +1,4 @@
+
 'use client'
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -6,19 +7,28 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { InfoIcon, Upload, Plus, Trash2 } from 'lucide-react';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { InfoIcon, Plus, Trash2 } from 'lucide-react';
+
+interface QuestionOption {
+  text: string;
+}
 
 interface Question {
   text: string;
+  options: QuestionOption[];
+  correctAnswer: number;
 }
 
 interface SponsorFormData {
   username: string;
   gameTitle: string;
+  campaignDescription: string;
   donation: number;
   gameStartTime: string;
   uploadImage: FileList;
   quizDuration: string;
+  isPublic: string;
   questions: Question[];
 }
 
@@ -27,10 +37,21 @@ const SponsorPromo = () => {
     defaultValues: {
       username: '',
       gameTitle: '',
+      campaignDescription: '',
       donation: 0,
       gameStartTime: '',
       quizDuration: '1',
-      questions: [{ text: '' }],
+      isPublic: 'true',
+      questions: [{
+        text: '',
+        options: [
+          { text: '' },
+          { text: '' },
+          { text: '' },
+          { text: '' }
+        ],
+        correctAnswer: 0
+      }],
     },
   });
 
@@ -44,7 +65,16 @@ const SponsorPromo = () => {
   };
 
   const addQuestion = () => {
-    append({ text: '' });
+    append({
+      text: '',
+      options: [
+        { text: '' },
+        { text: '' },
+        { text: '' },
+        { text: '' }
+      ],
+      correctAnswer: 0
+    });
   };
 
   const removeQuestion = (index: number) => {
@@ -104,6 +134,25 @@ const SponsorPromo = () => {
                 />
               </div>
 
+              {/* Campaign Description */}
+              <FormField
+                control={form.control}
+                name="campaignDescription"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-semibold">Campaign Description*</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Describe your campaign..."
+                        className="min-h-[100px] border-gray-300 focus:border-coral-red focus:ring-coral-red"
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               {/* Financial Info Row */}
               <div className="grid md:grid-cols-1 gap-6">
                 <FormField
@@ -130,7 +179,7 @@ const SponsorPromo = () => {
                 />
               </div>
 
-              {/* Game Start Time, Upload and Duration Row */}
+              {/* Game Start Time, Upload, Duration and Privacy Row */}
               <div className="grid md:grid-cols-3 gap-6">
                 <FormField
                   control={form.control}
@@ -153,7 +202,7 @@ const SponsorPromo = () => {
                   )}
                 />
 
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="uploadImage"
                   render={({ field: { onChange, value, ...field } }) => (
@@ -177,7 +226,7 @@ const SponsorPromo = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> */}
 
                 <FormField
                   control={form.control}
@@ -205,8 +254,32 @@ const SponsorPromo = () => {
                     </FormItem>
                   )}
                 />
-              </div>
 
+                <FormField
+                  control={form.control}
+                  name="isPublic"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center gap-2 text-black font-semibold">
+                        Campaign Visibility*
+                        <InfoIcon className="w-4 h-4 text-gray-400" />
+                      </FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="border-gray-300 focus:border-coral-red focus:ring-coral-red">
+                            <SelectValue placeholder="Select visibility" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="true">Public</SelectItem>
+                          <SelectItem value="false">Private</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
@@ -221,16 +294,16 @@ const SponsorPromo = () => {
                   </Button>
                 </div>
 
-                {fields.map((field, index) => (
-                  <div key={field.id} className="border border-gray-200 rounded-lg p-6 space-y-4">
+                {fields.map((field, questionIndex) => (
+                  <div key={field.id} className="border border-gray-200 rounded-lg p-6 space-y-6">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-lg font-semibold text-black">Question {index + 1}</h4>
+                      <h4 className="text-lg font-semibold text-black">Question {questionIndex + 1}</h4>
                       {fields.length > 1 && (
                         <Button
                           type="button"
                           variant="outline"
                           size="sm"
-                          onClick={() => removeQuestion(index)}
+                          onClick={() => removeQuestion(questionIndex)}
                           className="text-red-600 border-red-600 hover:bg-red-50"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -240,7 +313,7 @@ const SponsorPromo = () => {
                     
                     <FormField
                       control={form.control}
-                      name={`questions.${index}.text`}
+                      name={`questions.${questionIndex}.text`}
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-black font-semibold">Enter question</FormLabel>
@@ -255,13 +328,55 @@ const SponsorPromo = () => {
                         </FormItem>
                       )}
                     />
+
+                    <div className="space-y-4">
+                      <FormLabel className="text-black font-semibold">Add answers and select the correct one</FormLabel>
+                      
+                      <FormField
+                        control={form.control}
+                        name={`questions.${questionIndex}.correctAnswer`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={(value) => field.onChange(Number(value))}
+                                value={field.value?.toString()}
+                                className="grid grid-cols-2 gap-4"
+                              >
+                                {[0, 1, 2, 3].map((optionIndex) => (
+                                  <div key={optionIndex} className="flex items-center space-x-3">
+                                    <RadioGroupItem value={optionIndex.toString()} id={`q${questionIndex}-option${optionIndex}`} />
+                                    <FormField
+                                      control={form.control}
+                                      name={`questions.${questionIndex}.options.${optionIndex}.text`}
+                                      render={({ field: optionField }) => (
+                                        <FormItem className="flex-1">
+                                          <FormControl>
+                                            <Input
+                                              placeholder={`Answer ${String.fromCharCode(65 + optionIndex)}`}
+                                              className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
+                                              {...optionField}
+                                            />
+                                          </FormControl>
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+                                ))}
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </div>
                 ))}
-                </div>
+              </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center ">
-                <Button className="px-12 py-4 text-lg">
+              <div className="flex justify-center">
+                <Button className="px-12 py-4 text-lg bg-[#ff5840] hover:bg-[#ff5840]/90 text-white">
                   Launch Campaign
                 </Button>
               </div>
