@@ -3,7 +3,7 @@ import { motion}  from "framer-motion"
 
 import TextrotateComponent from "@/components/Textrotate"
 
-import { Check, Target, TargetIcon } from "lucide-react"
+import { Check, Circle, Target, TargetIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function Home() {
@@ -163,22 +163,18 @@ export default function Home() {
               <div>
                
                 
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start gap-3">
-                    <Check className=""/>
-                    <p className="text-white">Earn USDC for every quiz you complete</p>
+                <div className="space-y-5 mb-8 px-10 ">
+                  <div className="flex items-start gap-3 ">
+                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Earn USDC for every quiz you complete</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="text-coral-red w-5 h-5 mt-1 flex-shrink-0" />
-                    <p className="text-white">Choose from topics you're genuinely interested in</p>
+                  <div className="flex items-start gap-3 ">
+                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Choose from topics you're genuinely interested in</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="text-coral-red w-5 h-5 mt-1 flex-shrink-0" />
-                    <p className="text-white">Learn something new while getting rewarded</p>
+                  <div className="flex items-start gap-3 ">
+                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Learn something new while getting rewarded</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="text-coral-red w-5 h-5 mt-1 flex-shrink-0" />
-                    <p className="text-white">Instant payments, no waiting periods</p>
+                  <div className="flex items-start gap-3 ">
+                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Instant payments, no waiting periods</p>
                   </div>
                 </div>
               </div>
