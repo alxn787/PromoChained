@@ -10,7 +10,7 @@ export default function Home() {
   return(
     <div>
       <div className="h-screen ">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center mt-12">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center mt-12 bg-white">
             {/* <div className="text-6xl font-bold">
               Stop Shouting into the Void
             </div> */}
@@ -49,13 +49,13 @@ export default function Home() {
                   Stop Interrupting, Start Engaging
               </div>
               <div className="p-3">
-                <div className="p-2">
+                <div className="p-2 text-black">
                   Traditional ads are a battle for fleeting attention. We believe there&apos;s a <span className="font-bold text-black">better </span> way.
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-black">
                   Imagine your audience choosing your brand, drawn by genuine interest and rewarded engagement.
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-black">
                   When people want to learn, they&apos;re open. Your message isn&apos;t marketing. It&apos;s <span className="font-bold text-black">value</span>.
                 </div>
               </div>
