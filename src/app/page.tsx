@@ -202,8 +202,8 @@ export default function Home() {
             Join the growing list of forward-thinking companies who&apos;ve discovered that, <br/> The best marketing doesn&apos;t feel like marketing at all.
           </p>
           <Link href="/sponsor">
-            <div className="text-xl px-2 py-4 mb-8 bg-black text-white rounded-xl max-w-md mx-auto cursor-pointer">
-              Get Started - Launch Your Campaign
+            <div className="text-xl px-2 py-4 mb-8 bg-black text-white rounded-xl max-w-xs mx-auto cursor-pointer">
+              Get Started
             </div>
           </Link>
           <p className="text-black">

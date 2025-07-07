@@ -5,7 +5,7 @@ import CenterUnderline from '@/fancy/components/text/underline-center'
 
 export function AppHeader() {
   return (
-    <div className=''>
+    <div className='bg-white'>
       <div className="max-w-7xl mx-auto my-5 ">
         <div className='flex justify-between '>
             <div className="flex items-baseline gap-4">
