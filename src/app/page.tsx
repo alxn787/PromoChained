@@ -5,6 +5,7 @@ import TextrotateComponent from "@/components/Textrotate"
 
 import { Check, Circle, Target, TargetIcon } from "lucide-react"
 import Link from "next/link"
+import { Button } from "@/fancy/components/text/button"
 
 export default function Home() {
   return(
@@ -190,6 +191,28 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6  bg-white">
+        <div className="max-w-4xl mx-auto text-center ">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-8">
+            Ready to Revolutionize Your Marketing?
+          </h2>
+          <p className="text-xl text-black mb-8 leading-relaxed">
+            Join the growing list of forward-thinking companies who've discovered that, <br/> The best marketing doesn't feel like marketing at all.
+          </p>
+          <Link href="/sponsor">
+            <div className="text-xl px-2 py-4 mb-8 bg-black text-white rounded-xl max-w-md mx-auto cursor-pointer">
+              Get Started - Launch Your Campaign
+            </div>
+          </Link>
+          <p className="text-black">
+            Questions? {' '}
+            <a href="/faq" className="text-coral-red hover:underline font-semibold">Read our FAQ</a>
+            {' '} or {' '}
+            <a href="/contact" className="text-coral-red hover:underline font-semibold">Contact our Partnerships Team</a>.
+          </p>
         </div>
       </section>
 

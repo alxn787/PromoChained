@@ -5,15 +5,12 @@ use anchor_spl::{
 use anchor_spl::token::Transfer;
 use solana_program::rent::Rent;
 use anchor_spl::token::{Mint, Token, TokenAccount};
+use anchor_spl::{token};
 
     use anchor_lang::prelude::Pubkey;
     
 
-#[constant]
-pub const PROGRAM_AUTHORITY: Pubkey = Pubkey::new_from_array([
-    0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1,
-]);
+
 pub const SOL_ADDRESS: &str = "So11111111111111111111111111111111111111112";
 
 
@@ -21,13 +18,11 @@ declare_id!("8oGU39Svs87zZzAYSfMzE4j2Bt1QtKVpsSxWGKtRh8b6");
 
 #[program]
 pub mod promochain {
-    use anchor_spl::{token, token_interface::spl_pod::primitives};
-
     use super::*;
 
     pub fn init_config(ctx: Context<InitConfig>) -> Result<()> {
         let config = &mut ctx.accounts.config;
-        config.treasury_pubkey = PROGRAM_AUTHORITY;
+        config.treasury_pubkey = ctx.accounts.admin.key();
         config.authority_pubkey = ctx.accounts.admin.key();
         config.treasury_fee = 5;
         config.bump = ctx.bumps.config;
@@ -113,7 +108,6 @@ pub mod promochain {
 pub struct InitConfig<'info> {
     #[account(
         mut,
-        constraint = admin.key() == PROGRAM_AUTHORITY @ ErrorCode::UnauthorizedProgramAuthority
     )]
     pub admin: Signer<'info>,
 
@@ -149,7 +143,7 @@ pub struct InitGame<'info> {
     #[account(
         seeds = [b"config"],
         bump = config.bump,
-        constraint = config.usdc_mint != Pubkey::default() @ ErrorCode::ConfigNotInitialized // Ensure config is initialized with USDC mint
+        constraint = config.usdc_mint != Pubkey::default() @ ErrorCode::ConfigNotInitialized 
     )]
     pub config: Account<'info, ProgramConfig>,
 
