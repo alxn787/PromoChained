@@ -61,6 +61,51 @@ pub mod promochain {
         Ok(())
     }
 
+    pub fn end_game(ctx: Context<EndGame>) -> Result<()> {
+        let game = &mut ctx.accounts.game;
+        let config = &mut ctx.accounts.config;
+        let winner_amount = game.prize_amount.checked_mul(config.treasury_fee).ok_or(ProgramError::ArithmeticOverflow)?.checked_div(100).ok_or(ProgramError::ArithmeticOverflow)?;
+        let treasury_amount = game.prize_amount.checked_sub(winner_amount).ok_or(ProgramError::ArithmeticOverflow)?;
+
+        let game_code_bytes = game.game_code.as_bytes();
+
+        let seeds = [
+            b"vault".as_ref(),
+            game.admin.as_ref(),
+            game_code_bytes,
+            &[game.vault_bump],
+        ];
+
+        let signer_seeds = &[&seeds[..]];
+
+        let cpi_context = CpiContext::new_with_signer(
+            ctx.accounts.token_program.to_account_info(),
+            Transfer {
+                from: ctx.accounts.vault_token_account.to_account_info(),
+                to: ctx.accounts.winner_usdc_token_account.to_account_info(),
+                authority: ctx.accounts.vault.to_account_info(),
+            },
+            signer_seeds, 
+        );
+        token::transfer(cpi_context, winner_amount)?;
+
+        // Transfer treasury amount
+        let cpi_context_treasury = CpiContext::new_with_signer(
+            ctx.accounts.token_program.to_account_info(),
+            Transfer {
+                from: ctx.accounts.vault_token_account.to_account_info(),
+                to: ctx.accounts.treasury_usdc_token_account.to_account_info(),
+                authority: ctx.accounts.vault.to_account_info(),
+            },
+            signer_seeds, 
+        );
+        token::transfer(cpi_context_treasury, treasury_amount)?;
+
+        game.is_claimed = true; 
+        game.winner = ctx.accounts.winner.key(); 
+        Ok(())
+    }
+
 }
 
 
@@ -205,7 +250,8 @@ pub struct EndGame<'info> {
     pub treasury_authority: UncheckedAccount<'info>,
 
     #[account(
-        mut,
+        init_if_needed, // Ensure treasury account is initialized if it doesn't exist
+        payer = admin,
         associated_token::mint = usdc_mint,
         associated_token::authority = treasury_authority
     )]
@@ -222,7 +268,7 @@ pub struct EndGame<'info> {
 pub struct ProgramConfig {
     pub treasury_pubkey: Pubkey,
     pub authority_pubkey: Pubkey,
-    pub treasury_fee: u16,
+    pub treasury_fee: u64,
     pub bump: u8,
     pub usdc_mint: Pubkey,
 }
