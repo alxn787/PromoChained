@@ -106,6 +106,78 @@ pub struct InitGame<'info> {
     pub rent: Sysvar<'info, Rent>,
 }
 
+#[derive(Accounts)]
+pub struct EndGame<'info> {
+    #[account(mut)]
+    pub admin: Signer<'info>,
+
+    #[account(
+        mut,
+        seeds = [b"game", game.admin.as_ref(), game.game_code.as_bytes()],
+        bump = game.bump,
+        constraint = game.admin == admin.key() @ ErrorCode::InvalidAdmin,
+        constraint = !game.is_claimed @ ErrorCode::AlreadyClaimed,
+        constraint = game.usdc_mint == config.usdc_mint @ ErrorCode::InvalidMint
+    )]
+    pub game: Account<'info, Game>,
+
+    #[account(
+        seeds = [b"config"],
+        bump = config.bump,
+        constraint = config.usdc_mint != Pubkey::default() @ ErrorCode::ConfigNotInitialized 
+    )]
+    pub config: Account<'info, ProgramConfig>,
+
+    #[account(
+        constraint = usdc_mint.key() == config.usdc_mint @ ErrorCode::InvalidMint
+    )]
+    pub usdc_mint: Account<'info, Mint>,
+
+    /// CHECK: The vault PDA is the owner and signer for the vault_token_account.
+    #[account(
+        mut,
+        seeds = [b"vault", game.admin.as_ref(), game.game_code.as_bytes()],
+        bump = game.vault_bump,
+    )]
+    pub vault: UncheckedAccount<'info>,
+
+    #[account(
+        mut,
+        associated_token::mint = usdc_mint,
+        associated_token::authority = vault
+    )]
+    pub vault_token_account: Account<'info, TokenAccount>,
+
+    #[account(mut)]
+    pub winner: SystemAccount<'info>,
+
+    #[account(
+        init_if_needed,
+        payer = admin,
+        associated_token::mint = usdc_mint,
+        associated_token::authority = winner 
+    )]
+    pub winner_usdc_token_account: Account<'info, TokenAccount>,
+
+    /// CHECK: Only used to derive the treasury_usdc_token_account's owner.
+    #[account(
+        constraint = treasury_authority.key() == config.treasury_pubkey @ ErrorCode::InvalidTreasury
+    )]
+    pub treasury_authority: UncheckedAccount<'info>,
+
+    #[account(
+        mut,
+        associated_token::mint = usdc_mint,
+        associated_token::authority = treasury_authority
+    )]
+    pub treasury_usdc_token_account: Account<'info, TokenAccount>,
+
+    pub token_program: Program<'info, Token>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub system_program: Program<'info, System>,
+    pub rent: Sysvar<'info, Rent>,
+}
+
 #[account]
 #[derive(Default, InitSpace)]
 pub struct ProgramConfig {
