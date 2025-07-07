@@ -8,16 +8,16 @@ use solana_program::clock::Clock;
 use solana_program::rent::Rent;
 
     use anchor_lang::prelude::Pubkey;
+    
+    use anchor_lang::prelude::*;
 
-    #[constant]
-    pub const PROGRAM_AUTHORITY: Pubkey = Pubkey::new_from_array([
-        1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1,
-    ]);
-    pub const SOL_ADDRESS: &str = "So11111111111111111111111111111111111111112";
+#[constant]
+pub const PROGRAM_AUTHORITY: Pubkey = Pubkey::new_from_array([
+    0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1,
+]);
+pub const SOL_ADDRESS: &str = "So11111111111111111111111111111111111111112";
 
-
-use anchor_lang::prelude::*;
 
 declare_id!("8oGU39Svs87zZzAYSfMzE4j2Bt1QtKVpsSxWGKtRh8b6");
 
@@ -25,6 +25,17 @@ declare_id!("8oGU39Svs87zZzAYSfMzE4j2Bt1QtKVpsSxWGKtRh8b6");
 pub mod promochain {
     use super::*;
 
+    pub fn init_config(ctx: Context<InitConfig>) -> Result<()> {
+        let config = &mut ctx.accounts.config;
+        config.treasury_pubkey = PROGRAM_AUTHORITY;
+        config.authority_pubkey = ctx.accounts.admin.key();
+        config.treasury_fee = 5;
+        config.bump = ctx.bumps.config;
+        config.usdc_mint = Pubkey::default(); // TODO: Change to USDC mint
+        Ok(())
+    }
+
+    
 
 }
 
