@@ -202,15 +202,13 @@ export default function Home() {
             Join the growing list of forward-thinking companies who&apos;ve discovered that, <br/> The best marketing doesn&apos;t feel like marketing at all.
           </p>
           <Link href="/sponsor">
-            <div className="text-xl px-2 py-4 mb-8 bg-black text-white rounded-xl max-w-xs mx-auto cursor-pointer">
+            <div className="text-xl font-semibold py-4 mb-8 bg-[#ff5840]/90 hover:bg-[#ff5840]/100 text-white rounded-xl max-w-xs mx-auto cursor-pointer transition-all duration-200 ease-in-out ">
               Get Started
             </div>
           </Link>
           <p className="text-black">
-            Questions? {' '}
-            <a href="/faq" className="text-coral-red hover:underline font-semibold">Read our FAQ</a>
-            {' '} or {' '}
-            <a href="/contact" className="text-coral-red hover:underline font-semibold">Contact our Partnerships Team</a>.
+           Made by <span> </span>
+            <a href="https://github.com/alxn787" className="text-coral-red hover:underline font-semibold">@alxn787</a>.
           </p>
         </div>
       </section>
