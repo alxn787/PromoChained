@@ -1,4 +1,4 @@
-  // eslint-disable
+// eslint-disable
 'use client'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -103,10 +103,10 @@ const SponsorPromo = () => {
                     <FormItem>
                       <FormLabel className="text-black font-semibold">Your username*</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="Your username" 
+                        <Input
+                          placeholder="Your username"
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -121,10 +121,10 @@ const SponsorPromo = () => {
                     <FormItem>
                       <FormLabel className="text-black font-semibold">Campaign Title*</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="Campaign Title" 
+                        <Input
+                          placeholder="Campaign Title"
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -141,10 +141,10 @@ const SponsorPromo = () => {
                   <FormItem>
                     <FormLabel className="text-black font-semibold">Campaign Description*</FormLabel>
                     <FormControl>
-                      <Textarea 
+                      <Textarea
                         placeholder="Describe your campaign..."
                         className="min-h-[100px] border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                        {...field} 
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
@@ -164,11 +164,11 @@ const SponsorPromo = () => {
                         <InfoIcon className="w-4 h-4 text-gray-400" />
                       </FormLabel>
                       <FormControl>
-                        <Input 
-                          type="number" 
+                        <Input
+                          type="number"
                           placeholder="0"
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                          {...field} 
+                          {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
                       </FormControl>
@@ -190,10 +190,10 @@ const SponsorPromo = () => {
                         <InfoIcon className="w-4 h-4 text-gray-400" />
                       </FormLabel>
                       <FormControl>
-                        <Input 
+                        <Input
                           type="datetime-local"
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -211,10 +211,10 @@ const SponsorPromo = () => {
                         <InfoIcon className="w-4 h-4 text-gray-400" />
                       </FormLabel>
                       <FormControl>
-                        <Input 
+                        <Input
                           type="datetime-local"
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -225,7 +225,7 @@ const SponsorPromo = () => {
                 <FormField
                   control={form.control}
                   name="uploadImage"
-                  render={({ field: { onChange, value, ...field } }) => (
+                  render={({ field: { value, onChange, ref, ...rest } }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2 text-black font-semibold">
                         Upload brand image
@@ -233,12 +233,16 @@ const SponsorPromo = () => {
                       </FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Input 
+                          <Input
                             type="file"
                             accept="image/*"
                             className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                            onChange={(e) => onChange(e.target.files)}
-                            {...field}
+                            ref={ref}
+                            onChange={(e) => {
+                              onChange(e.target.files); 
+                            }}
+
+                            {...rest}
                           />
                           <Upload className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                         </div>
@@ -255,7 +259,6 @@ const SponsorPromo = () => {
                     <FormItem>
                       <FormLabel className="flex items-center gap-2 text-black font-semibold">
                         Campaign Visibility*
-                        <InfoIcon className="w-4 h-4 text-gray-400" />
                       </FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
@@ -303,7 +306,7 @@ const SponsorPromo = () => {
                         </Button>
                       )}
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name={`questions.${questionIndex}.text`}
@@ -311,10 +314,10 @@ const SponsorPromo = () => {
                         <FormItem>
                           <FormLabel className="text-black font-semibold">Enter question</FormLabel>
                           <FormControl>
-                            <Textarea 
+                            <Textarea
                               placeholder="Enter your question here..."
                               className="min-h-[120px] border-gray-300 focus:border-coral-red focus:ring-coral-red"
-                              {...field} 
+                              {...field}
                             />
                           </FormControl>
                           <FormMessage />
@@ -324,7 +327,7 @@ const SponsorPromo = () => {
 
                     <div className="space-y-4">
                       <FormLabel className="text-black font-semibold">Add answers and select the correct one</FormLabel>
-                      
+
                       <FormField
                         control={form.control}
                         name={`questions.${questionIndex}.correctAnswer`}
