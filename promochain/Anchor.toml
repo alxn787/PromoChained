@@ -17,3 +17,7 @@ wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[global]
+# This setting is usually fine by default, but ensure it points to your types dir
+idl_build = "target/idl"
