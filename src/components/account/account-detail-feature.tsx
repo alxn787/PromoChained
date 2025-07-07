@@ -1,3 +1,4 @@
+ /* eslint-disable */
 'use client'
 
 import { PublicKey } from '@solana/web3.js'

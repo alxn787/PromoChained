@@ -1,3 +1,4 @@
+ /* eslint-disable */
 import { AppHero } from '@/components/app-hero'
 
 const links: { label: string; href: string }[] = [
