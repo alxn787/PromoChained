@@ -6,14 +6,9 @@ import { WalletButton } from '@/components/solana/solana-provider'
 import CenterUnderline from '@/fancy/components/text/underline-center'
 import { useWallet } from '@solana/wallet-adapter-react'
 
-export function AppHeader({ links = [] }: { links: { label: string; path: string }[] }) {
+export function AppHeader() {
   const pathname = usePathname()
-  const [showMenu, setShowMenu] = useState(false)
-  const wallet = useWallet();
 
-  function isActive(path: string) {
-    return path === '/' ? pathname === '/' : pathname.startsWith(path)
-  }
 
   return (
     <div className=''>

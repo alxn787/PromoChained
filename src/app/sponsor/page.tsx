@@ -1,5 +1,4 @@
 'use client'
-import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -225,6 +224,7 @@ const SponsorPromo = () => {
                 <FormField
                   control={form.control}
                   name="uploadImage"
+                  //@ts-ignore
                   render={({ field: { onChange, value, ...field } }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2 text-black font-semibold">

@@ -1,11 +1,10 @@
 'use client'
-import { motion}  from "framer-motion"
+// import { motion}  from "framer-motion"
 
 import TextrotateComponent from "@/components/Textrotate"
 
-import { Check, Circle, Target, TargetIcon } from "lucide-react"
+import { Check} from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/fancy/components/text/button"
 
 export default function Home() {
   return(
