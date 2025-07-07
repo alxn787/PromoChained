@@ -1,15 +1,173 @@
 #![allow(clippy::result_large_err)]
+use anchor_spl::{
+    associated_token::AssociatedToken,
+    token::{self, Mint, Token, TokenAccount, Transfer},
+};
+use std::str::FromStr;
+use solana_program::clock::Clock;
+use solana_program::rent::Rent;
+
+    use anchor_lang::prelude::Pubkey;
+
+    #[constant]
+    pub const PROGRAM_AUTHORITY: Pubkey = Pubkey::new_from_array([
+        1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1,
+    ]);
+    pub const SOL_ADDRESS: &str = "So11111111111111111111111111111111111111112";
+
 
 use anchor_lang::prelude::*;
 
 declare_id!("8oGU39Svs87zZzAYSfMzE4j2Bt1QtKVpsSxWGKtRh8b6");
 
 #[program]
-pub mod counter {
+pub mod promochain {
     use super::*;
 
-}
-//#ff5840
 
-//#f4ecd9
-//#4b5563
+}
+
+
+#[derive(Accounts)]
+pub struct InitConfig<'info> {
+    #[account(
+        mut,
+        constraint = admin.key() == PROGRAM_AUTHORITY @ ErrorCode::UnauthorizedProgramAuthority
+    )]
+    pub admin: Signer<'info>,
+
+    #[account(
+        init,
+        payer = admin,
+        space = ProgramConfig::INIT_SPACE,
+        seeds = [b"config"],
+        bump
+    )]
+    pub config: Account<'info, ProgramConfig>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+#[instruction(
+    game_code: String,
+)]
+pub struct InitGame<'info> {
+    #[account(mut)]
+    pub admin: Signer<'info>,
+
+    #[account(
+        init,
+        payer = admin,
+        space = Game::INIT_SPACE,
+        seeds = [b"game", admin.key().as_ref(), game_code.as_bytes()],
+        bump,
+    )]
+    pub game: Account<'info, Game>,
+
+    #[account(
+        seeds = [b"config"],
+        bump = config.bump,
+        constraint = config.usdc_mint != Pubkey::default() @ ErrorCode::ConfigNotInitialized // Ensure config is initialized with USDC mint
+    )]
+    pub config: Account<'info, ProgramConfig>,
+
+    #[account(
+        constraint = usdc_mint.key() == config.usdc_mint @ ErrorCode::InvalidMint
+    )]
+    pub usdc_mint: Account<'info, Mint>,
+
+    /// CHECK: The vault PDA that will own the vault_token_account. It's safe because it's a PDA.
+    #[account(
+        seeds = [b"vault", admin.key().as_ref(), game_code.as_bytes()],
+        bump,
+    )]
+    pub vault: UncheckedAccount<'info>,
+
+    #[account(
+        init, 
+        payer = admin,
+        associated_token::mint = usdc_mint,
+        associated_token::authority = vault 
+    )]
+    pub vault_token_account: Account<'info, TokenAccount>,
+
+    #[account(
+        mut,
+        associated_token::mint = usdc_mint,
+        associated_token::authority = admin
+    )]
+    pub admin_usdc_token_account: Account<'info, TokenAccount>,
+
+    pub token_program: Program<'info, Token>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub system_program: Program<'info, System>,
+    pub rent: Sysvar<'info, Rent>,
+}
+
+#[account]
+#[derive(Default, InitSpace)]
+pub struct ProgramConfig {
+    pub treasury_pubkey: Pubkey,
+    pub authority_pubkey: Pubkey,
+    pub treasury_fee: u16,
+    pub bump: u8,
+    pub usdc_mint: Pubkey,
+}
+
+#[account]
+#[derive(InitSpace, Default)]
+pub struct Game {
+    pub admin: Pubkey,
+    #[max_len(20)] 
+    pub game_code: String,
+    pub bump: u8,
+    pub vault_bump: u8,
+    pub start_time: i64,
+    pub end_time: i64,
+    pub prize_amount: u64,
+    pub winner: Pubkey,
+    pub is_claimed: bool,
+    pub usdc_mint: Pubkey,
+}
+
+ #[error_code]
+    pub enum ErrorCode {
+        #[msg("The provided token mint is not the expected USDC mint.")]
+        InvalidMint,
+        #[msg("The prize for this game has already been claimed.")]
+        AlreadyClaimed,
+        #[msg("The caller is not the authorized quiz master for this game.")]
+        UnauthorizedQuizMaster,
+        #[msg("Game name is too long.")]
+        NameTooLong,
+        #[msg("Game code is too long.")]
+        GameCodeTooLong,
+        #[msg("End time must be after start time.")]
+        InvalidTimeRange,
+        #[msg("Admin token account not provided for SPL transfer.")]
+        AdminTokenAccountNotProvided,
+        #[msg("Vault token account not provided for SPL transfer.")]
+        VaultTokenAccountNotProvided,
+        #[msg("Treasury token account not provided for SPL transfer.")]
+        TreasuryTokenAccountNotProvided,
+        #[msg("Invalid admin for this game.")]
+        InvalidAdmin,
+        #[msg("Invalid token account for the game's token mint or native SOL requirement.")]
+        InvalidTokenAccount,
+        #[msg("Numeric overflow occurred.")]
+        NumericOverflow,
+        #[msg("Invalid treasury account.")]
+        InvalidTreasury,
+        #[msg("The caller is not the authorized program authority.")]
+        UnauthorizedProgramAuthority,
+        #[msg("The treasury fee percentage is too high.")]
+        TreasuryFeeTooHigh,
+        #[msg("The treasury address cannot be blank.")]
+        TreasuryAddressBlank,
+        #[msg("Config not initialized.")]
+        ConfigNotInitialized,
+        #[msg("Winner token account not provided for SPL winner.")]
+        WinnerTokenAccountNotProvided,
+    }

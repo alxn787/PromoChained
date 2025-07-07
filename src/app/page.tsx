@@ -38,8 +38,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div>
             <div className="text-4xl md:text-4xl font-bold text-black  text-center mb-12">
-              Your Product is a Story Waiting to Be Told{' '}
-              <div className="mt-2 ">Let's Make Them Eager to Listen</div>
+              Your Product is a Story Waiting to Be Told.{' '}
+              <div className="mt-2 ">Let's Make Them Eager to Listen.</div>
             </div>
           </div>
           
