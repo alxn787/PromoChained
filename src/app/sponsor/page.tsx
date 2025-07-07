@@ -1,3 +1,4 @@
+
 'use client'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -224,7 +225,7 @@ const SponsorPromo = () => {
                 <FormField
                   control={form.control}
                   name="uploadImage"
-                  //@ts-ignore
+                  // eslint-disable-next-line no-use-before-define
                   render={({ field: { onChange, value, ...field } }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2 text-black font-semibold">

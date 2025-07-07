@@ -1,15 +1,9 @@
 'use client'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
 import Link from 'next/link'
 import { WalletButton } from '@/components/solana/solana-provider'
 import CenterUnderline from '@/fancy/components/text/underline-center'
-import { useWallet } from '@solana/wallet-adapter-react'
 
 export function AppHeader() {
-  const pathname = usePathname()
-
-
   return (
     <div className=''>
       <div className="max-w-7xl mx-auto my-5 ">
