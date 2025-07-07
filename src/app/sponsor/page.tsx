@@ -1,4 +1,3 @@
-
 'use client'
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -8,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { InfoIcon, Plus, Trash2 } from 'lucide-react';
+import { InfoIcon, Upload, Plus, Trash2 } from 'lucide-react';
 
 interface QuestionOption {
   text: string;
@@ -26,8 +25,8 @@ interface SponsorFormData {
   campaignDescription: string;
   donation: number;
   gameStartTime: string;
+  gameEndTime: string;
   uploadImage: FileList;
-  quizDuration: string;
   isPublic: string;
   questions: Question[];
 }
@@ -40,7 +39,7 @@ const SponsorPromo = () => {
       campaignDescription: '',
       donation: 0,
       gameStartTime: '',
-      quizDuration: '1',
+      gameEndTime: '',
       isPublic: 'true',
       questions: [{
         text: '',
@@ -179,8 +178,8 @@ const SponsorPromo = () => {
                 />
               </div>
 
-              {/* Game Start Time, Upload, Duration and Privacy Row */}
-              <div className="grid md:grid-cols-3 gap-6">
+              {/* Game Start Time, End Time, Upload and Privacy Row */}
+              <div className="grid md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
                   name="gameStartTime"
@@ -202,7 +201,28 @@ const SponsorPromo = () => {
                   )}
                 />
 
-                {/* <FormField
+                <FormField
+                  control={form.control}
+                  name="gameEndTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center gap-2 text-black font-semibold">
+                        Campaign end time*
+                        <InfoIcon className="w-4 h-4 text-gray-400" />
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="datetime-local"
+                          className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
                   control={form.control}
                   name="uploadImage"
                   render={({ field: { onChange, value, ...field } }) => (
@@ -223,33 +243,6 @@ const SponsorPromo = () => {
                           <Upload className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                         </div>
                       </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                /> */}
-
-                <FormField
-                  control={form.control}
-                  name="quizDuration"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2 text-black font-semibold">
-                        Quiz Duration (minutes)*
-                        <InfoIcon className="w-4 h-4 text-gray-400" />
-                      </FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="border-gray-300 focus:border-coral-red focus:ring-coral-red">
-                            <SelectValue placeholder="Select duration" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1 minute</SelectItem>
-                          <SelectItem value="2">2 minutes</SelectItem>
-                          <SelectItem value="5">5 minutes</SelectItem>
-                          <SelectItem value="10">10 minutes</SelectItem>
-                        </SelectContent>
-                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}

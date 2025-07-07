@@ -1,15 +1,13 @@
-#![allow(clippy::result_large_err)]
+use anchor_lang::prelude::*;
 use anchor_spl::{
     associated_token::AssociatedToken,
-    token::{self, Mint, Token, TokenAccount, Transfer},
 };
-use std::str::FromStr;
-use solana_program::clock::Clock;
+
 use solana_program::rent::Rent;
+use anchor_spl::token::{Mint, Token, TokenAccount};
 
     use anchor_lang::prelude::Pubkey;
     
-    use anchor_lang::prelude::*;
 
 #[constant]
 pub const PROGRAM_AUTHORITY: Pubkey = Pubkey::new_from_array([
@@ -35,7 +33,7 @@ pub mod promochain {
         Ok(())
     }
 
-    
+
 
 }
 
