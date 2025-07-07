@@ -1,4 +1,3 @@
-// eslint-disable
 'use client'
 // import { motion}  from "framer-motion"
 
@@ -29,8 +28,8 @@ export default function Home() {
             <Link
               href={"https://x.com/siddharthb_/status/1940780218303590658"}
               className="px-4 py-2 text-black transition-colors hover:bg-white/10 rounded-lg border border-black cursor-pointer"
-              target="_blank" 
-              rel="noopener noreferrer" 
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Check us out
             </Link>
@@ -39,11 +38,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div>
             <div className="text-4xl md:text-4xl font-bold text-black  text-center mb-12">
-              Your Product is a Story Waiting to Be Told.{' '}
-              <div className="mt-2 ">Let's Make Them Eager to Listen.</div>
+              Your Product is a Story Waiting to Be Told.
+              <div className="mt-2 ">Let&apos;s Make Them Eager to Listen.</div>
             </div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-12 mb-16 mt-10 ">
             <div className="">
               <div className="text-center justify-center font-semibold mt-5 text-xl ">
@@ -51,13 +50,13 @@ export default function Home() {
               </div>
               <div className="p-3">
                 <div className="p-2">
-                  Traditional ads are a battle for fleeting attention. We believe there's a <span className="font-bold text-black">better </span> way.
+                  Traditional ads are a battle for fleeting attention. We believe there&apos;s a <span className="font-bold text-black">better </span> way.
                 </div>
                 <div className="p-2">
                   Imagine your audience choosing your brand, drawn by genuine interest and rewarded engagement.
                 </div>
                 <div className="p-2">
-                  When people want to learn, they're open. Your message isn't marketing. It's <span className="font-bold text-black">value</span>.
+                  When people want to learn, they&apos;re open. Your message isn&apos;t marketing. It&apos;s <span className="font-bold text-black">value</span>.
                 </div>
               </div>
             </div>
@@ -93,11 +92,11 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">
             The Unfair Advantage: Why This Works
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             <div className="space-y-8">
               <div className="flex items-start gap-4">
-                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" /> 
+                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-[#d1d5db] mb-2">Unmatched Engagement</h3>
                   <p className="text-[#9ca3af] leading-relaxed">
@@ -105,9 +104,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4">
-                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" /> 
+                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-[#d1d5db] mb-2">Guaranteed ROI</h3>
                   <p className="text-[#9ca3af] leading-relaxed">
@@ -116,10 +115,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-8">
               <div className="flex items-start gap-4">
-                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" /> 
+                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-[#d1d5db] mb-2">Build Authentic Brand Champions</h3>
                   <p className="text-[#9ca3af] leading-relaxed">
@@ -127,9 +126,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4">
-                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" /> 
+                <Check className="text-[#ff5840] w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-[#d1d5db] mb-2">The Crypto Advantage</h3>
                   <p className="text-[#9ca3af] leading-relaxed">
@@ -139,11 +138,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mb-15">
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center font-semibold">
               <Link
-                  href="https://x.com/siddharthb_/status/1940780218303590658" 
+                  href="https://x.com/siddharthb_/status/1940780218303590658"
                   className="text-lg px-6 py-3 bg-black hover:bg-white text-white hover:text-black border border-white rounded-xl transition-all duration-400 ease-in-out"
                   target="_blank"
                 >
@@ -159,17 +158,17 @@ export default function Home() {
               <p className="text-lg text-[#d1d5db] mb-6 leading-relaxed text-center">
                   Your curiosity is valuable. Your knowledge has worth. Your attention deserves compensation.
               </p>
-            
+
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-               
-                
+
+
                 <div className="space-y-5 mb-8 px-10 ">
                   <div className="flex items-start gap-3 ">
                     <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Earn USDC for every quiz you complete</p>
                   </div>
                   <div className="flex items-start gap-3 ">
-                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Choose from topics you're genuinely interested in</p>
+                    <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Choose from topics you&apos;re genuinely interested in</p>
                   </div>
                   <div className="flex items-start gap-3 ">
                     <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Learn something new while getting rewarded</p>
@@ -179,14 +178,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-neutral-900/30  p-8 rounded-xl border border-neutral-900">
                 <h3 className="text-2xl font-bold text-[#d1d5db] mb-6">How We Create a Win-Win Ecosystem:</h3>
                 <p className="text-[#9ca3af] leading-relaxed mb-4">
-                  Our platform thrives on a simple truth: <span className="text-coral-red font-semibold text-white">rewarded attention is the most valuable attention</span>. 
+                  Our platform thrives on a simple truth: <span className="text-coral-red font-semibold text-white">rewarded attention is the most valuable attention</span>.
                 </p>
                 <p className="text-[#9ca3af] leading-relaxed">
-                  Companies get engaged, interested users who actually want to learn about their products. You get paid for time you'd probably spend on social media anyway. <span className="text-white font-bold">Everyone wins</span>.
+                  Companies get engaged, interested users who actually want to learn about their products. You get paid for time you&apos;d probably spend on social media anyway. <span className="text-white font-bold">Everyone wins</span>.
                 </p>
               </div>
             </div>
@@ -200,7 +199,7 @@ export default function Home() {
             Ready to Revolutionize Your Marketing?
           </h2>
           <p className="text-xl text-black mb-8 leading-relaxed">
-            Join the growing list of forward-thinking companies who've discovered that, <br/> The best marketing doesn't feel like marketing at all.
+            Join the growing list of forward-thinking companies who&apos;ve discovered that, <br/> The best marketing doesn&apos;t feel like marketing at all.
           </p>
           <Link href="/sponsor">
             <div className="text-xl px-2 py-4 mb-8 bg-black text-white rounded-xl max-w-md mx-auto cursor-pointer">
