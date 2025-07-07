@@ -9,7 +9,6 @@ import { AccountChecker } from '@/components/account/account-ui'
 
 export function AppLayout({
   children,
-  links,
 }: {
   children: React.ReactNode
   links: { label: string; path: string }[]
