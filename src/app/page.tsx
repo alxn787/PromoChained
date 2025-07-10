@@ -1,5 +1,4 @@
 'use client'
-// import { motion}  from "framer-motion"
 
 import TextrotateComponent from "@/components/Textrotate"
 
@@ -11,11 +10,8 @@ export default function Home() {
     <div>
       <div className="h-screen ">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center mt-12 bg-white">
-            {/* <div className="text-6xl font-bold">
-              Stop Shouting into the Void
-            </div> */}
             <TextrotateComponent />
-          <div className="flex flex-col items-center justify-center mt-1 text-2xl text-neutral-600">
+          <div className="flex flex-col items-center justify-center mt-1 text-2xl text-neutral-600 text-center px-4">
             <div className="mb-1">
               Turn Your Marketing Into a Rewarding Experience.  
             </div>
@@ -24,16 +20,6 @@ export default function Home() {
           </div>
         </div>
         </div>
-          {/* <div className="flex items-center justify-center mt-4 text-xl">
-            <Link
-              href={"https://x.com/siddharthb_/status/1940780218303590658"}
-              className="px-4 py-2 text-black transition-colors hover:bg-white/10 rounded-lg border border-black cursor-pointer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Check us out
-            </Link>
-          </div> */}
       <section className="py-8 px-6 bg-gradient-to-r from-white to-gray-50">
         <div className="max-w-6xl mx-auto">
           <div>
@@ -161,8 +147,6 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-
-
                 <div className="space-y-5 mb-8 px-10 ">
                   <div className="flex items-start gap-3 ">
                     <span className="h-1 w-1 text-white">o</span><p className="text-[#d1d5db]">Earn USDC for every quiz you complete</p>
