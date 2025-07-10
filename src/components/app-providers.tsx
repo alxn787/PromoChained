@@ -9,7 +9,7 @@ import React from 'react'
 export function AppProviders({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ReactQueryProvider>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
         <ClusterProvider>
           <SolanaProvider>{children}</SolanaProvider>
         </ClusterProvider>
