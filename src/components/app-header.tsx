@@ -25,7 +25,7 @@ export function AppHeader() {
               </Link>
               
             </div>
-            <div className=" ">
+            <div className="text-neutral-900 ">
               <WalletButton />
             </div>
         </div>
