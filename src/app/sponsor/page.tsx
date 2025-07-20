@@ -1,4 +1,4 @@
- /* eslint-disable */
+/* eslint-disable */
 'use client'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { InfoIcon, Upload, Plus, Trash2 } from 'lucide-react';
+import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { send } from 'node:process';
 
 interface QuestionOption {
   text: string;
@@ -61,6 +64,7 @@ const SponsorPromo = () => {
 
   const onSubmit = (data: SponsorFormData) => {
     console.log('Form submitted:', data);
+    sendsol(data.donation);
   };
 
   const addQuestion = () => {
@@ -81,6 +85,37 @@ const SponsorPromo = () => {
       remove(index);
     }
   };
+
+  const { wallet, connected } = useWallet();
+
+  // Modify sendsol to accept the donation amount
+  async function sendsol(amount: number) { 
+    if(!wallet?.adapter.publicKey) {
+      console.error("Wallet not connected or public key not available.");
+      return;
+    }
+    
+    try {
+        const connection = new Connection("https://api.devnet.solana.com");
+        const lamports = amount * LAMPORTS_PER_SOL; // Convert SOL to lamports
+        if (lamports <= 0) {
+          console.warn("Donation amount is zero or negative. No transaction will be sent.");
+          return;
+        }
+
+        const transaction = new Transaction().add(
+            SystemProgram.transfer({
+                fromPubkey: wallet.adapter.publicKey, 
+                toPubkey: new PublicKey('FP4mUAwWEGbp7A45LULzxcWF2usBw7SeUj2L4M1SYiub'),
+                lamports: lamports, 
+            })
+        );
+        const signature = await wallet.adapter.sendTransaction(transaction, connection);
+        console.log('Transaction sent with signature:', signature);
+    } catch (error) {
+        console.error("Error sending SOL:", error);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-12 px-6">
@@ -160,7 +195,7 @@ const SponsorPromo = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2 text-black font-semibold">
-                        Donation to prize pool by you
+                        Donation to prize pool by you (in SOL)*
                         <InfoIcon className="w-4 h-4 text-gray-400" />
                       </FormLabel>
                       <FormControl>
@@ -170,6 +205,8 @@ const SponsorPromo = () => {
                           className="border-gray-300 focus:border-coral-red focus:ring-coral-red"
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
+                          step="0.000000001" // Allow fractional SOL input
+                          min="0" // Ensure positive donation
                         />
                       </FormControl>
                       <FormMessage />
@@ -372,7 +409,11 @@ const SponsorPromo = () => {
 
               {/* Submit Button */}
               <div className="flex justify-center">
-                <Button className="px-12 py-4 text-lg bg-[#ff5840] hover:bg-[#ff5840]/90 text-white">
+                <Button 
+                  type="button" 
+                  onClick={() => sendsol(form.getValues('donation'))} 
+                  className="px-12 py-4 text-lg bg-[#ff5840] hover:bg-[#ff5840]/90 text-white"
+                >
                   Launch Campaign
                 </Button>
               </div>
