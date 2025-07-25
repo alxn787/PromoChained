@@ -88,7 +88,9 @@ const SponsorPromo = () => {
 
   const { wallet, connected } = useWallet();
 
-  // Modify sendsol to accept the donation amount
+
+  //TODO connect  it to the contract intead of this transaction
+  
   async function sendsol(amount: number) { 
     if(!wallet?.adapter.publicKey) {
       console.error("Wallet not connected or public key not available.");
